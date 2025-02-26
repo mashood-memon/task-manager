@@ -17,6 +17,8 @@ export default function TaskForm({ onSubmit, initialData, onCancel }: TaskFormPr
     status: initialData?.status || 'pending',
   });
 
+  const today = new Date().toISOString().split('T')[0];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
@@ -60,6 +62,7 @@ export default function TaskForm({ onSubmit, initialData, onCancel }: TaskFormPr
             type="date"
             id="due_date"
             value={formData.due_date}
+            min={today}
             onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             required
